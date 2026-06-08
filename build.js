@@ -4,6 +4,8 @@ import { toHTML } from '@portabletext/to-html'
 import { renderTemplate } from './template.js'
 import { writeFileSync, mkdirSync, cpSync, existsSync } from 'fs'
 
+const FALLBACK_URL = 'https://wondu-website.vercel.app'
+
 const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
   dataset:   process.env.SANITY_DATASET ?? 'production',
@@ -57,8 +59,9 @@ async function build() {
   const data = {
     settings: {
       ...settings,
-      faviconUrl: settings.favicon?.asset ? imageUrlFor(settings.favicon.asset, { w: 512, h: 512 }) : null,
-      ogImageUrl: settings.ogImage?.asset ? imageUrlFor(settings.ogImage.asset, { w: 1200, h: 630 }) : null,
+      siteUrl:    (settings.siteUrl || FALLBACK_URL).replace(/\/$/, ''),
+      faviconUrl: settings.favicon?.asset  ? imageUrlFor(settings.favicon.asset,  { w: 512,  h: 512  }) : null,
+      ogImageUrl: settings.ogImage?.asset  ? imageUrlFor(settings.ogImage.asset,  { w: 1200, h: 630  }) : null,
     },
     hero,
     marqueeItems: marquee.items ?? [],
@@ -81,12 +84,23 @@ async function build() {
   mkdirSync('public', { recursive: true })
   writeFileSync('public/index.html', html, 'utf-8')
 
+  // robots.txt
+  const siteUrl = data.settings.siteUrl
+  writeFileSync('public/robots.txt',
+    `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`, 'utf-8')
+
+  // sitemap.xml
+  const now = new Date().toISOString().split('T')[0]
+  writeFileSync('public/sitemap.xml',
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${siteUrl}/</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>\n</urlset>\n`,
+    'utf-8')
+
   // Copy static assets (images folder)
   if (existsSync('images')) {
     cpSync('images', 'public/images', { recursive: true })
   }
 
-  console.log(`✅ Done → public/index.html`)
+  console.log(`✅ Done → public/index.html + robots.txt + sitemap.xml`)
 }
 
 build().catch(err => {

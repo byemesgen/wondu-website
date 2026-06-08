@@ -120,15 +120,37 @@ export function renderTemplate(data) {
     <title>${esc(s.siteTitle)}</title>
     <meta name="description" content="${escAttr(s.metaDescription)}" />
 
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="${escAttr(s.siteUrl)}" />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="${escAttr(s.siteUrl)}" />
     <meta property="og:title" content="${escAttr(s.siteTitle)}" />
     <meta property="og:description" content="${escAttr(s.metaDescription)}" />
     ${s.ogImageUrl ? `<meta property="og:image" content="${escAttr(s.ogImageUrl)}" />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="${escAttr(s.ogImageUrl)}" />` : ''}
+    <meta property="og:image:height" content="630" />` : ''}
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="${s.ogImageUrl ? 'summary_large_image' : 'summary'}" />
+    <meta name="twitter:title" content="${escAttr(s.siteTitle)}" />
+    <meta name="twitter:description" content="${escAttr(s.metaDescription)}" />
+    ${s.ogImageUrl ? `<meta name="twitter:image" content="${escAttr(s.ogImageUrl)}" />` : ''}
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">${JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: `${h.nameLineOne} ${h.nameLineTwo}`,
+      jobTitle: h.eyebrow,
+      description: s.metaDescription,
+      url: s.siteUrl,
+      ...(s.ogImageUrl && { image: s.ogImageUrl }),
+      sameAs: (s.socialLinks || [])
+        .map(l => l.url)
+        .filter(u => u && !u.startsWith('mailto:')),
+    })}</script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

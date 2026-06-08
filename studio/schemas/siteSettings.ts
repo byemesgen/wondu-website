@@ -62,6 +62,13 @@ export default {
       options: { hotspot: false },
     },
     {
+      name: 'siteUrl',
+      title: 'Site URL',
+      type: 'url',
+      group: 'meta',
+      description: 'Your canonical domain, e.g. https://wondudikran.com — used for canonical tag, OG URL, and sitemap.',
+    },
+    {
       name: 'ogImage',
       title: 'OG Share Image',
       type: 'image',
