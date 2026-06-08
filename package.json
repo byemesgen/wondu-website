@@ -1,0 +1,16 @@
+{
+  "name": "wondu-website",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build":         "node build.js",
+    "dev":           "node build.js && python3 -m http.server 3456 --directory public",
+    "studio:dev":    "cd studio && npm install && npm run dev",
+    "studio:deploy": "cd studio && npm run deploy"
+  },
+  "dependencies": {
+    "@sanity/client":        "^6.0.0",
+    "@portabletext/to-html": "^2.0.0",
+    "dotenv":                "^16.0.0"
+  }
+}
