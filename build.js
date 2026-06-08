@@ -12,13 +12,18 @@ const client = createClient({
   token:     process.env.SANITY_TOKEN,
 })
 
-function imageUrlFor(asset) {
+function imageUrlFor(asset, { w, h } = {}) {
   if (!asset?._ref) return null
   const parts = asset._ref.split('-') // image-<id>-<dims>-<ext>
   const ext  = parts[parts.length - 1]
   const dims = parts[parts.length - 2]
   const id   = parts.slice(1, parts.length - 2).join('-')
-  return `https://cdn.sanity.io/images/${process.env.SANITY_PROJECT_ID}/${process.env.SANITY_DATASET ?? 'production'}/${id}-${dims}.${ext}`
+  let url = `https://cdn.sanity.io/images/${process.env.SANITY_PROJECT_ID}/${process.env.SANITY_DATASET ?? 'production'}/${id}-${dims}.${ext}`
+  const params = []
+  if (w) params.push(`w=${w}`)
+  if (h) params.push(`h=${h}`)
+  if (params.length) url += '?' + params.join('&')
+  return url
 }
 
 async function build() {
@@ -50,7 +55,10 @@ async function build() {
   }) : ''
 
   const data = {
-    settings,
+    settings: {
+      ...settings,
+      faviconUrl: settings.favicon?.asset ? imageUrlFor(settings.favicon.asset, { w: 512, h: 512 }) : null,
+    },
     hero,
     marqueeItems: marquee.items ?? [],
     projects: (projects ?? []).map((p, i) => ({

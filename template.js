@@ -132,6 +132,10 @@ export function renderTemplate(data) {
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,600;1,300&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:ital,wght@0,300;0,400;0,600;1,300&display=swap" /></noscript>
 
+    <!-- Favicon -->
+    ${s.faviconUrl ? `<link rel="icon" type="image/png" href="${escAttr(s.faviconUrl)}" />
+    <link rel="apple-touch-icon" href="${escAttr(s.faviconUrl)}" />` : ''}
+
     <!-- CMS accent color override -->
     <style>:root { --accent: ${accentColor}; } [data-theme="light"] { --accent: ${accentColor}; }</style>
 

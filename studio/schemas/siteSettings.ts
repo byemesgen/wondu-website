@@ -54,6 +54,14 @@ export default {
       validation: (R: any) => R.required().max(160),
     },
     {
+      name: 'favicon',
+      title: 'Favicon',
+      type: 'image',
+      group: 'meta',
+      description: 'Shown in browser tabs. Recommended: 32×32px or 512×512px square PNG/SVG.',
+      options: { hotspot: false },
+    },
+    {
       name: 'ogImage',
       title: 'OG Share Image',
       type: 'image',
