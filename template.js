@@ -124,6 +124,11 @@ export function renderTemplate(data) {
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${escAttr(s.siteTitle)}" />
     <meta property="og:description" content="${escAttr(s.metaDescription)}" />
+    ${s.ogImageUrl ? `<meta property="og:image" content="${escAttr(s.ogImageUrl)}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="${escAttr(s.ogImageUrl)}" />` : ''}
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

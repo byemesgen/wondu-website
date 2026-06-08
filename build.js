@@ -58,6 +58,7 @@ async function build() {
     settings: {
       ...settings,
       faviconUrl: settings.favicon?.asset ? imageUrlFor(settings.favicon.asset, { w: 512, h: 512 }) : null,
+      ogImageUrl: settings.ogImage?.asset ? imageUrlFor(settings.ogImage.asset, { w: 1200, h: 630 }) : null,
     },
     hero,
     marqueeItems: marquee.items ?? [],
