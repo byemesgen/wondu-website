@@ -41,7 +41,7 @@ export function renderTemplate(data) {
     const num = String(i + 1).padStart(2, '0')
     const bg  = p.thumbnailUrl
       ? `background:url('${escAttr(p.thumbnailUrl)}') center/cover no-repeat`
-      : `background:linear-gradient(145deg,${p.gradientStart} 0%,${p.gradientMid} 55%,${p.gradientEnd} 100%)`
+      : `background:#111`
     const tagsHtml = (p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')
     return `
                 <article class="pcard pcard-new" onclick="openVideo('${escAttr(p.videoPlatform)}','${escAttr(p.videoId)}')" role="button" tabindex="0">

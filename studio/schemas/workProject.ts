@@ -64,30 +64,12 @@ export default {
       validation: (R: any) => R.required().min(1).max(5),
     },
     {
-      name: 'gradientStart',
-      title: 'Gradient — Start Color (hex)',
-      type: 'string',
-      description: 'Used as placeholder background when no thumbnail is uploaded. e.g. #001209',
-      validation: (R: any) => R.required(),
-    },
-    {
-      name: 'gradientMid',
-      title: 'Gradient — Mid Color (hex)',
-      type: 'string',
-      validation: (R: any) => R.required(),
-    },
-    {
-      name: 'gradientEnd',
-      title: 'Gradient — End Color (hex)',
-      type: 'string',
-      validation: (R: any) => R.required(),
-    },
-    {
       name: 'thumbnail',
       title: 'Thumbnail Image',
       type: 'image',
-      description: 'When provided, replaces the gradient as the card background. Recommended: 16:10 ratio.',
+      description: 'Card background image. Accepts JPG, PNG, or GIF. Recommended: 16:10 ratio.',
       options: { hotspot: true },
+      validation: (R: any) => R.required(),
     },
   ],
   preview: {
