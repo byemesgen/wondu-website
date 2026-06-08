@@ -244,8 +244,8 @@ export function renderTemplate(data) {
     ============================================ */
 
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 22px 44px; display: flex; justify-content: space-between; align-items: center; transition: padding 0.45s cubic-bezier(0.4,0,0.2,1), top 0.45s cubic-bezier(0.4,0,0.2,1), left 0.45s cubic-bezier(0.4,0,0.2,1), right 0.45s cubic-bezier(0.4,0,0.2,1), border-radius 0.45s cubic-bezier(0.4,0,0.2,1), background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease; }
-        nav.scrolled { top: 16px; left: 22%; right: 22%; gap: 48px; padding: 14px 36px; border-radius: 100px; background: rgba(12,12,11,0.80); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
-        [data-theme="light"] nav.scrolled { background: rgba(240,237,229,0.85); box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
+        nav.scrolled { top: 16px; left: 22%; right: 22%; gap: 48px; padding: 14px 36px; border-radius: 100px; background: rgba(54,54,54,0.90); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 4px 24px rgba(0,0,0,0.25); }
+        [data-theme="light"] nav.scrolled { background: rgba(255,255,255,0.90); box-shadow: 0 4px 24px rgba(0,0,0,0.10); }
         .nav-logo { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; letter-spacing: -0.02em; }
         .nav-right { display: flex; align-items: center; gap: 36px; }
         .nav-links { display: flex; gap: 28px; }
