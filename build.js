@@ -67,7 +67,11 @@ async function build() {
       index:        i + 1,
       thumbnailUrl: p.thumbnail?.asset ? imageUrlFor(p.thumbnail.asset) : null,
     })),
-    about: { ...about, bioHtml },
+    about: {
+      ...about,
+      bioHtml,
+      headshotUrl: about.headshot?.asset ? imageUrlFor(about.headshot.asset, { w: 800 }) : null,
+    },
     contact,
   }
 

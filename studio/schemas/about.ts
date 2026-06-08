@@ -5,6 +5,13 @@ export default {
   __experimental_actions: ['update', 'publish'],
   fields: [
     {
+      name: 'headshot',
+      title: 'Headshot Photo',
+      type: 'image',
+      description: 'Portrait photo shown above the bio. Accepts JPG, PNG, or GIF.',
+      options: { hotspot: true },
+    },
+    {
       name: 'bio',
       title: 'Biography',
       type: 'array',

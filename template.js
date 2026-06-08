@@ -330,6 +330,7 @@ export function renderTemplate(data) {
 
         #about { padding: 120px 44px; }
         .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; margin-top: 80px; }
+        .about-headshot { width: 100%; max-width: 220px; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: 8px; margin-bottom: 36px; display: block; }
         .about-bio p { font-size: clamp(17px, 1.7vw, 22px); line-height: 1.62; font-weight: 300; color: var(--muted); margin-bottom: 24px; }
         .about-bio p:last-child { margin-bottom: 0; }
         .about-bio strong { font-weight: 300; color: var(--fg); }
@@ -548,6 +549,7 @@ export function renderTemplate(data) {
             </div>
             <div class="about-grid">
                 <div class="about-bio">
+                    ${about.headshotUrl ? `<img class="about-headshot" src="${escAttr(about.headshotUrl)}" alt="Wondu Dikran" />` : ''}
                     ${about.bioHtml}
                     <a href="${cvUrl}" class="cv-btn" style="margin-top:20px;">
                         View CV
