@@ -30,10 +30,11 @@ export default {
       validation: (R: any) => R.required(),
     },
     {
-      name: 'cvUrl',
-      title: 'CV PDF URL',
-      type: 'url',
-      description: 'Linked from the "View CV" button below the bio',
+      name: 'cv',
+      title: 'CV / Resume (PDF)',
+      type: 'file',
+      description: 'Upload your CV as a PDF. Linked from the "View CV" button below the bio.',
+      options: { accept: 'application/pdf' },
     },
     {
       name: 'imdbUrl',

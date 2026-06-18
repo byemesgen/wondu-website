@@ -74,6 +74,14 @@ async function build() {
       ...about,
       bioHtml,
       headshotUrl: about.headshot?.asset ? imageUrlFor(about.headshot.asset, { w: 800 }) : null,
+      cvUrl: (() => {
+        const ref = about.cv?.asset?._ref
+        if (!ref) return null
+        const parts = ref.split('-') // file-<id>-<ext>
+        const ext = parts[parts.length - 1]
+        const id = parts.slice(1, parts.length - 1).join('-')
+        return `https://cdn.sanity.io/files/${process.env.SANITY_PROJECT_ID}/${process.env.SANITY_DATASET ?? 'production'}/${id}.${ext}`
+      })(),
     },
     contact,
   }
