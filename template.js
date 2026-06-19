@@ -549,16 +549,6 @@ export function renderTemplate(data) {
             <div class="projects">
                 ${workCardsHtml}
             </div>
-            <div class="pdf-strip" style="margin-top:48px;padding-top:48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
-                <div>
-                    <p style="font-size:14px;font-weight:600;color:var(--fg);margin-bottom:4px;">Looking for more?</p>
-                    <p style="font-size:13px;color:var(--muted);line-height:1.5;">Additional work is available as a PDF, including projects from earlier in my career.</p>
-                </div>
-                <a href="${pdfUrl}" class="cv-btn">
-                    View PDF
-                    <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12L12 2M12 2H4M12 2V10"/></svg>
-                </a>
-            </div>
         </section>
 
         <!-- ABOUT -->
@@ -744,10 +734,9 @@ export function renderTemplate(data) {
         /* ---- SCROLL ANIMATIONS ---- */
         function initScroll() {
             gsap.set('.pcard:not([hidden])', { opacity: 0, y: 40 });
-            gsap.set('.pdf-strip', { opacity: 0, y: 24 });
             gsap.set('.about-bio .cv-btn', { opacity: 0, y: 16 });
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelectorAll('.pcard:not([hidden]), .pdf-strip, .about-bio .cv-btn').forEach(el => {
+                document.querySelectorAll('.pcard:not([hidden]), .about-bio .cv-btn').forEach(el => {
                     el.style.opacity = '1'; el.style.transform = 'none';
                 });
                 return;
@@ -761,7 +750,6 @@ export function renderTemplate(data) {
             gsap.utils.toArray('.about-bio p').forEach((el, i) => {
                 gsap.fromTo(el, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.65, delay: i * 0.08, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 90%' } });
             });
-            gsap.to('.pdf-strip', { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', scrollTrigger: { trigger: '.pdf-strip', start: 'top 88%' } });
             gsap.to('.about-bio .cv-btn', { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', scrollTrigger: { trigger: '.about-bio .cv-btn', start: 'top 92%' } });
             gsap.utils.toArray('.about-side > div').forEach((el, i) => {
                 gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65, delay: i * 0.1, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
